@@ -1,0 +1,53 @@
+<div class="container">
+  <h2>Person Details</h2>
+
+  <!-- Table to display contacts -->
+  <table>
+    <thead>
+      <tr>
+        <th>Full Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip Code</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.fullname }}</td>
+        <td>{{ contact.address }}</td>
+        <td>{{ contact.city }}</td>
+        <td>{{ contact.state }}</td>
+        <td>{{ contact.zipCode }}</td>
+        <td>{{ contact.phoneNumber }}</td>
+        <td>
+          <button (click)="onEdit(contact)">✏️ Edit</button>
+          <button (click)="onDelete(contact.id!)">🗑 Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Button to add new contact -->
+  <button (click)="onAdd()">➕ Add Person</button>
+
+  <!-- Form for Adding/Editing -->
+  <div *ngIf="selectedContact" class="form-container">
+    <h3>{{ selectedContact.id ? 'Edit Contact' : 'Add New Contact' }}</h3>
+    
+    <input [(ngModel)]="selectedContact.fullname" placeholder="Full Name" required />
+    <input [(ngModel)]="selectedContact.phoneNumber" placeholder="Phone Number" required />
+    <input [(ngModel)]="selectedContact.address" placeholder="Address" required />
+    <input [(ngModel)]="selectedContact.city" placeholder="City" required />
+    <input [(ngModel)]="selectedContact.state" placeholder="State" required />
+    <input [(ngModel)]="selectedContact.zipCode" placeholder="Zip Code" required />
+
+    <!-- Buttons for Save and Cancel -->
+    <div class="button-group">
+      <button (click)="onSave()">💾 Save</button>
+      <button (click)="onCancelEdit()">❌ Cancel</button>
+    </div>
+  </div>
+</div>
